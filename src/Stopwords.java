@@ -7,18 +7,18 @@ import java.util.Scanner;
 
 public class Stopwords {
 	
-	private class Word {
+	private class StopWord {
 		public String element;
-		public Word next;
+		public StopWord next;
 		
-		public Word(String element) {
+		public StopWord(String element) {
 			this.element = element;
 			next = null;
 		}
 	}
 	
-	private Word head;
-	private Word tail;
+	private StopWord head;
+	private StopWord tail;
 	private int count;
 	
 	public Stopwords() throws IOException {
@@ -32,7 +32,7 @@ public class Stopwords {
 		Path path = Paths.get("stopwords.txt");
 		try(Scanner sc = new Scanner (Files.newBufferedReader(path, Charset.forName("utf8")))){
 			while(sc.hasNext()){
-				Word aux = new Word(sc.next());
+				StopWord aux = new StopWord(sc.next());
 				if (head == null) {
 		            head = aux;
 		        } else {
@@ -49,7 +49,7 @@ public class Stopwords {
 	}
 	
 	public boolean contains(String palavra) {
-		Word aux = head;
+		StopWord aux = head;
 		while(aux != null) {
 			if(aux.element.equals(palavra)){
 				return true;
@@ -60,7 +60,7 @@ public class Stopwords {
 	}
 	
 	public String toString() {
-		Word aux = head;
+		StopWord aux = head;
 		String resp="";
 		while(aux != null){
 			resp  = resp +"\n"+aux.element;
@@ -68,10 +68,4 @@ public class Stopwords {
 		}
 		return resp;
 	}
-		
-	
-	
-	
-	
-	
 }

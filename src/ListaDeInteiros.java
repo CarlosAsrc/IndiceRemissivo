@@ -71,7 +71,7 @@ public class ListaDeInteiros {
         return (aux.element);
     }
 
-    public Integer set(int index, Integer element) {
+    public int set(int index, int element) {
         if ((index < 0) || (index >= count)) {
             throw new IndexOutOfBoundsException();
         }
@@ -79,7 +79,7 @@ public class ListaDeInteiros {
         for (int i = 0; i < index; i++) {
             aux = aux.next;
         }
-        Integer tmp = aux.element;
+        int tmp = aux.element;
         aux.element = element;
         return tmp;
 
@@ -134,7 +134,7 @@ public class ListaDeInteiros {
         count = 0;
     }
 
-    public Integer removeByIndex(int index) {
+    public int removeByIndex(int index) {
         if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException();
         }
@@ -154,7 +154,7 @@ public class ListaDeInteiros {
             aux = aux.next;
             c++;
         }
-        Integer element = aux.next.element;
+        int element = aux.next.element;
         if (tail == aux.next) {
             tail = aux;
         }
