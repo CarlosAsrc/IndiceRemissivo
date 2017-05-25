@@ -44,7 +44,7 @@ public class Interface {
 			String line = texto.getLinha(i);
 			String separadores = " .,;'?!()[]{}$%#*:";
 			String palavras[] = line.split("[" + Pattern.quote(separadores) + "]");
-			for(int j=0; i<palavras.length; i++){
+			for(int j=0; j<palavras.length; j++){
 				//A parte mais complicada na manipulação das palavras acontece aqui:
 				String palavra = palavras[j];
 				if(!indice.contains(palavra)){

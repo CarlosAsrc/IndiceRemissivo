@@ -71,7 +71,7 @@ public class Texto {
 				if(linhaComPalavras.contains(palavra)){
 					lista.add(aux.pagina);
 					int paginaAnterior = aux.pagina;
-					while(aux.pagina == paginaAnterior){
+					while(aux != null && aux.pagina == paginaAnterior){
 						aux = aux.next;
 					}
 				} else {
