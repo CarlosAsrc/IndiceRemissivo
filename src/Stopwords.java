@@ -29,10 +29,12 @@ public class Stopwords {
 	}
 	
 	public void carregaDados() throws  IOException{
+		StopWord aux = new StopWord("");
+		head = aux; tail = head; count++;
 		Path path = Paths.get("stopwords.txt");
 		try(Scanner sc = new Scanner (Files.newBufferedReader(path, Charset.forName("utf8")))){
 			while(sc.hasNext()){
-				StopWord aux = new StopWord(sc.next());
+				 aux = new StopWord(sc.next());
 				if (head == null) {
 		            head = aux;
 		        } else {

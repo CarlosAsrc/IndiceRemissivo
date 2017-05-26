@@ -38,27 +38,29 @@ public class Interface {
 			System.out.println("Arquivo não encontrado.");
 			System.exit(0);
 		}
-		System.out.println("Texto carregado.");	
-		System.out.println("Montando Indice Remissivo...");	
+		System.out.println("Texto carregado.\n"+texto.toString());	
+		System.out.println("\nMontando Indice Remissivo...");	
 		for(int i=0; i<texto.size(); i++){
 			String line = texto.getLinha(i);
-			String separadores = " .,;'?!()[]{}$%#*:";
+			String separadores = " .,-;'?!()[]{}$%#*:";
 			String palavras[] = line.split("[" + Pattern.quote(separadores) + "]");
 			for(int j=0; j<palavras.length; j++){
 				//A parte mais complicada na manipulação das palavras acontece aqui:
-				String palavra = palavras[j];
-				if(!indice.contains(palavra)){
-					ListaDeInteiros paginas = texto.paginasDaPalavra(palavra);
-					indice.add(palavra, paginas);
-				} else{
-					indice.incrementaOcorrencia(palavra);
+				String palavra = palavras[j].toLowerCase();
+				if(!stopwords.contains(palavra)) {
+					if(!indice.contains(palavra)){
+						ListaDeInteiros paginas = texto.paginasDaPalavra(palavra);
+						indice.add(palavra, paginas);
+					} else{
+						indice.incrementaOcorrencia(palavra);
+					}
 				}
 			}
 		}	
-		System.out.println("Finish");		
-		for(int i=0; i<indice.size(); i++){
-			System.out.println(indice.getPalavra(i));
-		}
+		System.out.println(indice.toString());
+		//for(int i=0; i<indice.size(); i++){
+		//	System.out.println(indice.getPalavra(i));
+		//}
 		//System.out.println(texto.toString());
 		//menu();
 	}

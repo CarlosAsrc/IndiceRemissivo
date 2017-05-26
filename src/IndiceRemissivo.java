@@ -27,7 +27,7 @@ public class IndiceRemissivo {
 	}
 	
 	public void add(String palavra, ListaDeInteiros paginas) {
-        Word aux = new Word(palavra, paginas);
+		Word aux = new Word(palavra, paginas);
         if (head == null) {
             head = aux;
         } else {
@@ -80,6 +80,16 @@ public class IndiceRemissivo {
 			cont++;
 		}
 		return aux.element;
+	}
+	
+	public String toString(){
+		Word aux = head;
+		String resp = "\nINDICE REMISSIVO\nFormato:     Palavra (ocorrencias): |pagina|..";
+		while(aux != null){
+			resp = resp+"\n"+aux.element+"("+aux.ocorrencias+")"+": "+aux.paginas.toString();
+			aux = aux.next;
+		}
+		return resp;
 	}
 	
 	public int size(){

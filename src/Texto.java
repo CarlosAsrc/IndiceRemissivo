@@ -59,27 +59,27 @@ public class Texto {
 	public ListaDeInteiros paginasDaPalavra(String palavra){
 		ListaDeInteiros lista = new ListaDeInteiros();
 		Linha aux = head;
-		String separadores = " .,;'?!()[]{}$%#*:";
+		String separadores = " .,-;'?!()[]{}$%#*:";
 		String [] palavrasSeparadas;
+		boolean flag=true;
 		while(aux != null){
-				palavrasSeparadas = aux.element.split("[" + Pattern.quote(separadores) + "]");
-				String linhaComPalavras = "";
-				for(int i=0; i<palavrasSeparadas.length; i++){
-					linhaComPalavras = palavrasSeparadas[i] + " ";
-				}
-				
-				if(linhaComPalavras.contains(palavra)){
+			palavrasSeparadas = aux.element.split("[" + Pattern.quote(separadores) + "]");
+			flag = true;
+			for(int i=0; i<palavrasSeparadas.length; i++){
+				if(palavrasSeparadas[i].equalsIgnoreCase(palavra)){
 					lista.add(aux.pagina);
 					int paginaAnterior = aux.pagina;
 					while(aux != null && aux.pagina == paginaAnterior){
 						aux = aux.next;
 					}
-				} else {
-					aux = aux.next;
-				}	
+					flag = false;
+				}		
 			}
-			return lista;
+			if(flag){aux = aux.next;}
+			
 		}
+		return lista;
+	}
 	
 	public int size(){
 		return count;

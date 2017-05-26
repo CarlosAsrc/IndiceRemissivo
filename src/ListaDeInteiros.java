@@ -220,7 +220,8 @@ public class ListaDeInteiros {
     	String resp = "";
     	Node aux = head;
     	while(aux != null) {
-    		resp = resp + aux.element + ", ";
+    		resp = resp + "|" +aux.element + "|";
+    		aux = aux.next;
     	}
     	return resp;
     }
