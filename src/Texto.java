@@ -85,6 +85,10 @@ public class Texto {
 		return count;
 	}
 	
+	public int getTotalPaginas(){
+		return (count/40)+1;
+	}
+	
 	public String toString(){
 		String txt = "";
 		Linha aux = head;

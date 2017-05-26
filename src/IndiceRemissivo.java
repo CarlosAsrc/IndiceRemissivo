@@ -82,6 +82,42 @@ public class IndiceRemissivo {
 		return aux.element;
 	}
 	
+	public String palavraMaisFrequente(){
+		Word aux = head;
+		Word maior = aux;
+		while(aux != null){
+			if(aux.ocorrencias > maior.ocorrencias){
+				maior = aux;
+			}
+			aux = aux.next;
+		}
+		return maior.element +" ("+ maior.ocorrencias+" vezes)";
+	}
+	
+	public int paginaComplexa(int totalPaginas){
+		Word aux;
+		int paginaComplexa = 1;
+		int wordsIndexadasAtual;
+		int wordsIndexadasComplexa = 0;
+		for(int i=1; i <= totalPaginas; i++){
+			wordsIndexadasAtual = 0;
+			aux = head;
+			while(aux != null){
+				if(aux.paginas.contains(i)){
+					wordsIndexadasAtual++;
+				}
+				aux = aux.next;
+			}
+			if(wordsIndexadasAtual > wordsIndexadasComplexa){
+				wordsIndexadasComplexa = wordsIndexadasAtual;
+				paginaComplexa = i;
+			}
+		}
+		return paginaComplexa;
+	}
+	
+	
+	
 	public String toString(){
 		Word aux = head;
 		String resp = "\nINDICE REMISSIVO\nFormato:     Palavra (ocorrencias): |pagina|..";

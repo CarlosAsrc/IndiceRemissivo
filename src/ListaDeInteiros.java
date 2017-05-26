@@ -215,7 +215,6 @@ public class ListaDeInteiros {
     }
     
     
-    @Override
     public String toString() {
     	String resp = "";
     	Node aux = head;

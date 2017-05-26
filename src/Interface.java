@@ -13,16 +13,23 @@ public class Interface {
 	private Texto texto;
 	private IndiceRemissivo indice;
 	private Scanner in;
+	private int numeroStopwords;
+	private int totalPalavras;
 	
 	public Interface () throws IOException{
 		this.stopwords = new Stopwords();
 		this.texto = new Texto();
 		this.indice = new IndiceRemissivo();
 		this.in = new Scanner (System.in);
-		load();
+		numeroStopwords = 0;
+		totalPalavras = 0;
+		loadText();
+		loadIndice();
+		testes();
+		menu();
 	}
 	
-	public void load (){
+	public void loadText(){
 		// (CÓDIGO DA LEITURA DO ARQUIVO E INSERÇÃO DOS DADOS NOS OBJETOS "texto" E "indice")
 		System.out.println("Informe o nome do arquivo seguido de '.txt'");
 		String id = in.next(); 
@@ -38,7 +45,10 @@ public class Interface {
 			System.out.println("Arquivo não encontrado.");
 			System.exit(0);
 		}
-		System.out.println("Texto carregado.\n"+texto.toString());	
+		System.out.println("Texto carregado.\n"+texto.toString());
+	}
+	
+	public void loadIndice(){
 		System.out.println("\nMontando Indice Remissivo...");	
 		for(int i=0; i<texto.size(); i++){
 			String line = texto.getLinha(i);
@@ -47,22 +57,30 @@ public class Interface {
 			for(int j=0; j<palavras.length; j++){
 				//A parte mais complicada na manipulação das palavras acontece aqui:
 				String palavra = palavras[j].toLowerCase();
+				totalPalavras++;
 				if(!stopwords.contains(palavra)) {
 					if(!indice.contains(palavra)){
 						ListaDeInteiros paginas = texto.paginasDaPalavra(palavra);
 						indice.add(palavra, paginas);
-					} else{
+					} 
+					else {
 						indice.incrementaOcorrencia(palavra);
 					}
+				} 
+				else {
+					numeroStopwords++;
 				}
 			}
-		}	
-		System.out.println(indice.toString());
-		//for(int i=0; i<indice.size(); i++){
-		//	System.out.println(indice.getPalavra(i));
-		//}
-		//System.out.println(texto.toString());
-		//menu();
+		}
+	}
+	
+	public void testes(){
+		//RESULTADOS (ESSE MÉTODO SERÁ DELETADO E CONVERTIDO NAS OPÇÕES DO MENU):
+				System.out.println(indice.toString());
+				System.out.println("\nTotal de palavras: "+totalPalavras);
+				System.out.println("Total palavras do indice remissivo (sem repetir): "+indice.size());
+				System.out.println("total Stopwords: "+numeroStopwords);
+				System.out.println("pagina complexa: "+indice.paginaComplexa(texto.getTotalPaginas()));
 	}
 	
 	public void menu(){}
