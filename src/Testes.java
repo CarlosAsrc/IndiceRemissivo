@@ -11,9 +11,15 @@ public class Testes {
 			System.out.println(palavras[i]);
 		}*/
 		
-		String teste = "carlos andre sousa rodrigues\ncarro";
+		/*String teste = "carlos andre sousa rodrigues\ncarro";
 		if(teste.contains("z")){System.out.println("contem");}
 		else {System.out.println("Nao contem");}
+		*/
+		
+		String palavra = "andre";
+		String nome = "carlos andre sousa rodrigues";
+		nome = nome.replaceAll("andre", "["+palavra+"]");
+		System.out.println(nome);
 	}
 	
 	

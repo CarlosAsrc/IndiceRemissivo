@@ -14,6 +14,10 @@ public class IndiceRemissivo {
 			next = null;
 			ocorrencias = 1;
 		}
+		
+		public String toString(){
+			return element+"("+ocorrencias+")"+": "+paginas.toString();
+		}
 	}
 		
 	private Word head;
@@ -49,11 +53,11 @@ public class IndiceRemissivo {
 		return false;
 	}
 	
-	public Word getWord(String element){
+	public String getPalavra(String element){
 		Word aux = head;
 		while(aux != null){
 			if(aux.element.equals(element)){
-				return aux;
+				return aux.toString();
 			}
 			aux = aux.next;
 		}
@@ -122,7 +126,7 @@ public class IndiceRemissivo {
 		Word aux = head;
 		String resp = "\nINDICE REMISSIVO\nFormato:     Palavra (ocorrencias): |pagina|..";
 		while(aux != null){
-			resp = resp+"\n"+aux.element+"("+aux.ocorrencias+")"+": "+aux.paginas.toString();
+			resp = resp+"\n"+aux.toString();
 			aux = aux.next;
 		}
 		return resp;

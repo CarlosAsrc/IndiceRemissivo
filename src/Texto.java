@@ -76,7 +76,6 @@ public class Texto {
 				}		
 			}
 			if(flag){aux = aux.next;}
-			
 		}
 		return lista;
 	}
@@ -87,6 +86,38 @@ public class Texto {
 	
 	public int getTotalPaginas(){
 		return (count/40)+1;
+	}
+	
+	public String pesquisarPalavra(String palavra, int pagina){
+		if(pagina < 1 || pagina > ((count/40)+1)){
+			return "Página não existente!";
+		}
+		if(palavra == null || palavra == ""){
+			return "Nenhuma palavra informada";
+		}
+		
+		String resposta = "";
+		Linha aux = head;
+		while(aux.pagina != pagina){
+			aux = aux.next;
+		}
+		String separadores = " .,-;'?!()[]{}$%#*:";
+		String [] palavrasSeparadas;
+		String palavraMesmoFormato = "";
+		while(aux != null && aux.pagina == pagina){
+			String linha = aux.element;
+			palavrasSeparadas = linha.split("[" + Pattern.quote(separadores)+ "]");
+			for(int i=0; i<palavrasSeparadas.length; i++){
+				if(palavrasSeparadas[i].equalsIgnoreCase(palavra)){
+					palavraMesmoFormato = palavrasSeparadas[i];
+					linha = linha.replaceAll(palavraMesmoFormato, "["+palavraMesmoFormato+"]");
+					i = palavrasSeparadas.length;
+				}
+			}
+			resposta = resposta + "\n" + linha;
+			aux = aux.next;
+		}
+		return resposta;
 	}
 	
 	public String toString(){
