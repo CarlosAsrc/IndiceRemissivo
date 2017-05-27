@@ -16,7 +16,7 @@ public class IndiceRemissivo {
 		}
 		
 		public String toString(){
-			return element+"("+ocorrencias+")"+": "+paginas.toString();
+			return element+" ("+ocorrencias+")"+": "+paginas.toString();
 		}	
 	}
 		

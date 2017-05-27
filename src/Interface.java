@@ -30,7 +30,6 @@ public class Interface {
 	}
 	
 	public void loadText(){
-		// (CÓDIGO DA LEITURA DO ARQUIVO E INSERÇÃO DOS DADOS NOS OBJETOS "texto" E "indice")
 		boolean flag;
 		do{
 			flag = true;
@@ -60,13 +59,14 @@ public class Interface {
 			if(i == (texto.size()/4)){System.out.print("25%..");}
 			if(i == (texto.size()/2)){System.out.print("\n50%..");}
 			
+			String vazio = "";
 			String line = texto.getLinha(i);
-			String separadores = " .,-;'?!()[]/{}$%#*:";
+			String separadores = " .,-;'?!()[]/{}$%#*:"+vazio;
 			String palavras[] = line.split("[" + Pattern.quote(separadores) + "]");
 			for(int j=0; j<palavras.length; j++){
 				//A parte mais complicada na manipulação das palavras acontece aqui:
 				String palavra = palavras[j].toLowerCase();
-				totalPalavras++;
+				if(!palavra.equals("")){totalPalavras++;}
 				if(!stopwords.contains(palavra)) {
 					if(!indice.contains(palavra)){
 						ListaDeInteiros paginas = texto.paginasDaPalavra(palavra);
@@ -77,7 +77,7 @@ public class Interface {
 					}
 				} 
 				else {
-					numeroStopwords++;
+					if(!palavra.equals("")){numeroStopwords++;}
 				}
 			}
 		}
@@ -131,7 +131,7 @@ public class Interface {
 	
 	public void menuPercentualStopwords(){
 		double percentual = (numeroStopwords * 100.0) / totalPalavras;
-		System.out.println("Total de palavras: "+totalPalavras+"\nNumero de palavras que eram Stopwords: "+numeroStopwords+"\nPercentual de Stopwords: "+percentual+"%");
+		System.out.println("Total de palavras: "+totalPalavras+"\nNumero de palavras que eram Stopwords: "+numeroStopwords+"\nNumero de palavras aceitas: "+(totalPalavras-numeroStopwords)+"\nPercentual de Stopwords: "+percentual+"%");
 	}
 	
 	public void menuPalavraFrequente(){}
