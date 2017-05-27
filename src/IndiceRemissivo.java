@@ -17,7 +17,7 @@ public class IndiceRemissivo {
 		
 		public String toString(){
 			return element+"("+ocorrencias+")"+": "+paginas.toString();
-		}
+		}	
 	}
 		
 	private Word head;
@@ -120,6 +120,17 @@ public class IndiceRemissivo {
 		return paginaComplexa;
 	}
 	
+	//INCOMPLETO:
+	public void ordena(){
+		Word ant = head;
+		Word aux = ant.next;
+		while(aux.next != null){
+			if(ant.element.compareTo(aux.element) > 0){
+				
+			}
+			aux = aux.next;
+		}
+	}
 	
 	
 	public String toString(){
@@ -134,7 +145,7 @@ public class IndiceRemissivo {
 	
 	public int size(){
 		return count;
-	}
+	}	
 	
 }
 

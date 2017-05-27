@@ -25,7 +25,7 @@ public class Interface {
 		totalPalavras = 0;
 		loadText();
 		loadIndice();
-		testes();
+		//testes();
 		menu();
 	}
 	
@@ -38,7 +38,7 @@ public class Interface {
 			String id = in.next(); 
 			Path path = Paths.get(id);
 			try (BufferedReader reader = Files.newBufferedReader(path, Charset.forName("utf8"))) {
-				System.out.println("Carregando texto..");	  
+				System.out.println("Carregando arquivo...");	  
 				String line = null;
 				while ((line = reader.readLine()) != null) {
 					texto.add(line);
@@ -49,15 +49,19 @@ public class Interface {
 				flag = false;
 			}
 		} while (flag == false);
-		System.out.println("Texto carregado.\n"+texto.toString());
+		System.out.println("Arquivo carregado.");
 	}
 	
 	
 	public void loadIndice(){
 		System.out.println("\nMontando Indice Remissivo...");	
 		for(int i=0; i<texto.size(); i++){
+			
+			if(i == (texto.size()/4)){System.out.print("25%..");}
+			if(i == (texto.size()/2)){System.out.print("\n50%..");}
+			
 			String line = texto.getLinha(i);
-			String separadores = " .,-;'?!()[]{}$%#*:";
+			String separadores = " .,-;'?!()[]/{}$%#*:";
 			String palavras[] = line.split("[" + Pattern.quote(separadores) + "]");
 			for(int j=0; j<palavras.length; j++){
 				//A parte mais complicada na manipulação das palavras acontece aqui:
@@ -77,11 +81,12 @@ public class Interface {
 				}
 			}
 		}
+		System.out.println("\nÍndice Remissivo completo!  "+indice.size()+" Palavras."+" Linhas: "+texto.size());
 	}
 	
 	public void testes(){
 		//RESULTADOS (ESSE MÉTODO SERÁ DELETADO E CONVERTIDO NAS OPÇÕES DO MENU):
-				System.out.println(indice.toString());
+				//System.out.println(indice.toString());
 				//System.out.println("\nTotal de palavras: "+totalPalavras);
 				//System.out.println("Total palavras do indice remissivo (sem repetir): "+indice.size());
 				//System.out.println("total Stopwords: "+numeroStopwords);
@@ -89,7 +94,49 @@ public class Interface {
 				//System.out.println("palavra java na pagina 2: "+texto.pesquisarPalavra("jaVa", 2));
 	}
 	
-	public void menu(){}
+	public void menu(){
+		String opcao = "";
+		do{
+			System.out.println("\nEscolha uma das opções abaixo:"+
+							   "\n1 - Exibir indice remissivo."+
+							   "\n2 - Exibir percentual de stopwords no texto."+
+							   "\n3 - Exibir palavra mais frequente."+
+							   "\n4 - Pesquisar sobre determinada palavra."+
+							   "\n5 - Ver pagina mais complexa."+
+							   "\n0 - Sair.");
+			opcao = in.next();
+			
+			switch (opcao){
+			case "1": 
+				//Temporario:
+				System.out.println(indice.toString());
+				//menuOrdemAlfabetica();
+				break;
+			case "2": 
+				menuPercentualStopwords();
+				break;
+			case "3": 
+				menuPalavraFrequente();
+				break;
+			case "4":
+				menuPesquisarPalavra();
+				break;
+			case "5": 
+				menuPaginaComplexa();
+			}
+		}while(!opcao.equals("0"));
+	}
 	
+	public void menuOrdemAlfabetica(){}
 	
+	public void menuPercentualStopwords(){
+		double percentual = (numeroStopwords * 100.0) / totalPalavras;
+		System.out.println("Total de palavras: "+totalPalavras+"\nNumero de palavras que eram Stopwords: "+numeroStopwords+"\nPercentual de Stopwords: "+percentual+"%");
+	}
+	
+	public void menuPalavraFrequente(){}
+	
+	public void menuPesquisarPalavra(){}
+	
+	public void menuPaginaComplexa(){}
 }

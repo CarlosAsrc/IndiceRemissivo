@@ -53,7 +53,7 @@ public class Stopwords {
 	public boolean contains(String palavra) {
 		StopWord aux = head;
 		while(aux != null) {
-			if(aux.element.equals(palavra)){
+			if(aux.element.equalsIgnoreCase(palavra)){
 				return true;
 			}
 			aux = aux.next;
