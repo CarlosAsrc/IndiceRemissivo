@@ -59,7 +59,7 @@ public class Texto {
 	public ListaDeInteiros paginasDaPalavra(String palavra){
 		ListaDeInteiros lista = new ListaDeInteiros();
 		Linha aux = head;
-		String separadores = " .,-;'?!()[]{}/$%#*:";
+		String separadores = " .,-_;'?!()[]{}/$%#*:\"";
 		String [] palavrasSeparadas;
 		boolean flag=true;
 		while(aux != null){
@@ -101,7 +101,7 @@ public class Texto {
 		while(aux.pagina != pagina){
 			aux = aux.next;
 		}
-		String separadores = " .,-;'?!()[]{}/$%#*:";
+		String separadores = " .,-_;'?!()[]{}/$%#*:\"";
 		String [] palavrasSeparadas;
 		String palavraMesmoFormato = "";
 		while(aux != null && aux.pagina == pagina){

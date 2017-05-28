@@ -30,6 +30,38 @@ public class IndiceRemissivo {
 		count = 0;
 	}
 	
+	
+	
+	public void addOrder(String palavra, ListaDeInteiros paginas) {
+        if (count == 0) {
+            add(palavra, paginas);
+        }
+        else if (palavra.compareTo(head.element) < 0) { // insercao no inicio
+            add(0, palavra, paginas);
+        }
+        else if (palavra.compareTo(tail.element) > 0) { // insercao no final
+            add(palavra, paginas);
+        } 
+        else { // insercao no meio - procurar a posicao
+            Word ant = head;
+            Word aux = head.next;
+            Word n = new Word(palavra, paginas);
+            while (aux != null) {
+                if (palavra.compareTo(aux.element) < 0) {
+                    n.next = aux;
+                    ant.next = n;
+                    count++;
+                    break;
+                }
+                ant = aux;
+                aux = aux.next;
+            }
+        }
+    }
+	
+	
+	
+	
 	public void add(String palavra, ListaDeInteiros paginas) {
 		Word aux = new Word(palavra, paginas);
         if (head == null) {
@@ -40,6 +72,34 @@ public class IndiceRemissivo {
         tail = aux;
         count++;
     }
+	
+	public void add(int index, String palavra, ListaDeInteiros paginas) {
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Word n = new Word(palavra, paginas);
+        if (index == 0) { 
+            n.next = head;
+            head = n;
+            if (tail == null) {
+                tail = n;
+            }
+        } else if (index == count) { 
+            tail.next = n;
+            tail = n;
+        } else {
+            Word aux = head;
+            for (int i = 0; i < index - 1; i++) {
+                aux = aux.next;
+            }
+            n.next = aux.next;
+            aux.next = n;
+        }
+        count++;
+    }
+	
+	
 	
 	public boolean contains(String palavra){
 		if(palavra == null){return false;}
@@ -53,21 +113,10 @@ public class IndiceRemissivo {
 		return false;
 	}
 	
-	public String getPalavra(String element){
+	public void incrementaOcorrencia(String palavra){
 		Word aux = head;
 		while(aux != null){
-			if(aux.element.equals(element)){
-				return aux.toString();
-			}
-			aux = aux.next;
-		}
-		return null;
-	}
-	
-	public void incrementaOcorrencia(String element){
-		Word aux = head;
-		while(aux != null){
-			if(aux.element.equals(element)){
+			if(aux.element.equals(palavra)){
 				aux.ocorrencias++;
 				return;
 			}
@@ -119,19 +168,6 @@ public class IndiceRemissivo {
 		}
 		return paginaComplexa+";"+wordsIndexadasComplexa;
 	}
-	
-	//INCOMPLETO:
-	public void ordena(){
-		Word ant = head;
-		Word aux = ant.next;
-		while(aux.next != null){
-			if(ant.element.compareTo(aux.element) > 0){
-				
-			}
-			aux = aux.next;
-		}
-	}
-	
 	
 	public String toString(){
 		Word aux = head;

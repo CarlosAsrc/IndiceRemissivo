@@ -25,7 +25,6 @@ public class Interface {
 		totalPalavras = 0;
 		loadText();
 		loadIndice();
-		//testes();
 		menu();
 	}
 	
@@ -59,9 +58,8 @@ public class Interface {
 			if(i == (texto.size()/4)){System.out.print("25%..");}
 			if(i == (texto.size()/2)){System.out.print("\n50%..");}
 			
-			String vazio = "";
 			String line = texto.getLinha(i);
-			String separadores = " .,-;'?!()[]/{}$%#*:"+vazio;
+			String separadores = " .,-_;'?!()[]/{}$%#*:\"";
 			String palavras[] = line.split("[" + Pattern.quote(separadores) + "]");
 			for(int j=0; j<palavras.length; j++){
 				//A parte mais complicada na manipulação das palavras acontece aqui:
@@ -70,7 +68,7 @@ public class Interface {
 				if(!stopwords.contains(palavra)) {
 					if(!indice.contains(palavra)){
 						ListaDeInteiros paginas = texto.paginasDaPalavra(palavra);
-						indice.add(palavra, paginas);
+						indice.addOrder(palavra, paginas);
 					} 
 					else {
 						indice.incrementaOcorrencia(palavra);
