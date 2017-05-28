@@ -60,8 +60,6 @@ public class IndiceRemissivo {
     }
 	
 	
-	
-	
 	public void add(String palavra, ListaDeInteiros paginas) {
 		Word aux = new Word(palavra, paginas);
         if (head == null) {
@@ -125,7 +123,7 @@ public class IndiceRemissivo {
 	}
 	
 	public String getPalavra(int index){
-		if(count==0 || index<0 || index > count){}
+		if(count==0 || index<0 || index > count){return null;}
 		Word aux = head;
 		int cont = 0;
 		while(cont != index){
@@ -133,6 +131,18 @@ public class IndiceRemissivo {
 			cont++;
 		}
 		return aux.element;
+	}
+	
+	public String getPalavra(String palavra){
+		if(palavra.equals(null) || palavra.equals("")){return "Palavra nula.";}
+		Word aux = head;
+		while(aux != null){
+			if(aux.element.equals(palavra)){
+				return aux.toString();
+			}
+			aux = aux.next;
+		}
+		return "Palavra não encontrada!";
 	}
 	
 	public String palavraMaisFrequente(){

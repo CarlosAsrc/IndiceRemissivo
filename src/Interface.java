@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -95,16 +96,6 @@ public class Interface {
 		System.out.println("\nÍndice Remissivo completo!  "+indice.size()+" Palavras indexadas."+" Linhas: "+texto.size());
 	}
 	
-	public void testes(){
-		//RESULTADOS (ESSE MÉTODO SERÁ DELETADO E CONVERTIDO NAS OPÇÕES DO MENU):
-				//System.out.println(indice.toString());
-				//System.out.println("\nTotal de palavras: "+totalPalavras);
-				//System.out.println("Total palavras do indice remissivo (sem repetir): "+indice.size());
-				//System.out.println("total Stopwords: "+numeroStopwords);
-				//System.out.println("pagina complexa: "+indice.paginaComplexa(texto.getTotalPaginas()));
-				//System.out.println("palavra java na pagina 2: "+texto.pesquisarPalavra("jaVa", 2));
-	}
-	
 	public void menu(){
 		String opcao = "";
 		do{
@@ -127,7 +118,7 @@ public class Interface {
 				menuPercentualStopwords();
 				break;
 			case "3": 
-				menuPalavraFrequente();
+				System.out.println(indice.palavraMaisFrequente());
 				break;
 			case "4":
 				menuPesquisarPalavra();
@@ -138,16 +129,45 @@ public class Interface {
 		}while(!opcao.equals("0"));
 	}
 	
-	public void menuOrdemAlfabetica(){}
-	
 	public void menuPercentualStopwords(){
 		double percentual = (numeroStopwords * 100.0) / totalPalavras;
 		System.out.println("Total de palavras: "+totalPalavras+"\nNumero de palavras que eram Stopwords: "+numeroStopwords+"\nNumero de palavras aceitas: "+(totalPalavras-numeroStopwords)+"\nPercentual de Stopwords: "+percentual+"%");
 	}
 	
-	public void menuPalavraFrequente(){}
+	public void menuPesquisarPalavra(){
+		String palavra = "";
+		String textoPalavra = "";
+		do{
+			System.out.println("Informe a palavra: ");
+			palavra = in.next().toLowerCase();
+			textoPalavra = indice.getPalavra(palavra);
+		}while(textoPalavra.equals("Palavra nula.") || textoPalavra.equals("Palavra não encontrada!"));
+		System.out.println(textoPalavra);
+		
+		String pagina = "";
+		String textoPagina;
+		int page=0;
+		boolean flag = true;
+		do{
+			flag = true;
+			System.out.println("Informe a página a ser exibida: ");
+			pagina = in.next();
+			
+			try{
+				page = Integer.parseInt(pagina);
+			}catch(NumberFormatException e) {
+				flag = false;
+			}
+			textoPagina = texto.pesquisarPalavra(palavra, page);
+			System.out.println(textoPagina);
+		}while(flag==false || !texto.paginasDaPalavra(palavra).contains(page));
+	}
 	
-	public void menuPesquisarPalavra(){}
-	
-	public void menuPaginaComplexa(){}
+	public void menuPaginaComplexa(){
+		String dados = indice.paginaComplexa(texto.getTotalPaginas());
+		String[] dadosSeparados = dados.split(";");
+		String pagina = dadosSeparados[0];
+		String numeroPalavras = dadosSeparados[1];
+		System.out.println("Página Complexa: "+pagina+"\n"+numeroPalavras+" palavras indexadas.");
+	}
 }
