@@ -1,5 +1,4 @@
 
-//CARLOS ANDRÉ
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -57,8 +56,18 @@ public class Interface {
 		System.out.println("\nMontando Indice Remissivo...");	
 		for(int i=0; i<texto.size(); i++){
 			
-			if(i == (texto.size()/4)){System.out.print("25%..");}
-			if(i == (texto.size()/2)){System.out.print("\n50%..");}
+			int estagio = texto.size() / 10;
+			if(i == estagio){System.out.print("10%..");}
+			else if(i == estagio*2){System.out.print("20%..");}
+			else if(i == estagio*3){System.out.print("30%..");}
+			else if(i == estagio*4){System.out.print("40%..");}
+			else if(i == estagio*5){System.out.print("50%..");}
+			else if(i == estagio*6){System.out.print("60%..");}
+			else if(i == estagio*7){System.out.print("70%..");}
+			else if(i == estagio*8){System.out.print("80%..");}
+			else if(i == estagio*9){System.out.print("90%..");}
+			else if(i == estagio*10){System.out.print("100%");}
+			
 			
 			String line = texto.getLinha(i);
 			String separadores = " .,-_;'?!()[]/{}$%#*:\"";
@@ -66,7 +75,9 @@ public class Interface {
 			for(int j=0; j<palavras.length; j++){
 				//A parte mais complicada na manipulação das palavras acontece aqui:
 				String palavra = palavras[j].toLowerCase();
+				
 				if(!palavra.equals("")){totalPalavras++;}
+				
 				if(!stopwords.contains(palavra)) {
 					if(!indice.contains(palavra)){
 						ListaDeInteiros paginas = texto.paginasDaPalavra(palavra);
