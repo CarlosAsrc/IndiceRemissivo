@@ -98,7 +98,7 @@ public class IndiceRemissivo {
 		return maior.element +" ("+ maior.ocorrencias+" vezes)";
 	}
 	
-	public int paginaComplexa(int totalPaginas){
+	public String paginaComplexa(int totalPaginas){
 		Word aux;
 		int paginaComplexa = 1;
 		int wordsIndexadasAtual;
@@ -117,7 +117,7 @@ public class IndiceRemissivo {
 				paginaComplexa = i;
 			}
 		}
-		return paginaComplexa;
+		return paginaComplexa+";"+wordsIndexadasComplexa;
 	}
 	
 	//INCOMPLETO:

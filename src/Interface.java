@@ -81,7 +81,7 @@ public class Interface {
 				}
 			}
 		}
-		System.out.println("\nÍndice Remissivo completo!  "+indice.size()+" Palavras."+" Linhas: "+texto.size());
+		System.out.println("\nÍndice Remissivo completo!  "+indice.size()+" Palavras indexadas."+" Linhas: "+texto.size());
 	}
 	
 	public void testes(){
