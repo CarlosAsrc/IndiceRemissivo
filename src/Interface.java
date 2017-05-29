@@ -96,7 +96,7 @@ public class Interface {
 		System.out.println("\nÍndice Remissivo completo!  "+indice.size()+" Palavras indexadas."+" Linhas: "+texto.size());
 	}
 	
-	public void menu(){
+	 public void menu(){
 		String opcao = "";
 		do{
 			System.out.println("\nEscolha uma das opções abaixo:"+
@@ -110,9 +110,7 @@ public class Interface {
 			
 			switch (opcao){
 			case "1": 
-				//Temporario:
 				System.out.println(indice.toString());
-				//menuOrdemAlfabetica();
 				break;
 			case "2": 
 				menuPercentualStopwords();
